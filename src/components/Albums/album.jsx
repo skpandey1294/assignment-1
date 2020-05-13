@@ -24,7 +24,6 @@ class Album extends Component {
     componentDidMount() {
         axios(`${baseUrl}/photos?albumId=${this.props.match.params.albumId}`)
         .then(response => {
-            console.log(response)
             this.setState({
                 photos:response.data,
                 currPicture: response.data[0].url,
@@ -40,7 +39,6 @@ class Album extends Component {
 
     prev = () => {
         index--
-        console.log(index)
         this.setState({
             currPicture: this.state.photos[index].url,
             currTitle: this.state.photos[index].title,
