@@ -7,6 +7,15 @@ const styles = {
 
   _card: {
     maxWidth: 340,
+    height: 300,
+    margin: 10,
+    textAlign: 'start',
+    backgroundColor: '#fafafa',
+    fontSize: 10,
+  },
+
+  _singleCard: {
+    maxWidth: 340,
     margin: 10,
     textAlign: 'start',
     backgroundColor: '#fafafa',

@@ -1,0 +1,13 @@
+.card{
+    max-width: 340;
+    height: 340;
+    margin: 10;
+    text-align: 'start';
+    background-color: '#fafafa';
+    font-size: 10; 
+}
+
+.user-container{
+    display: 'flex';
+    flex-wrap: 'wrap';
+}

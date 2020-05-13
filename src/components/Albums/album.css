@@ -1,0 +1,24 @@
+.card-container {
+  width: '21vw';
+  height: '40vh';
+  background-color: '#f2eff1';
+  margin-left: '39vw';
+  margin-top: '20vh';
+}
+
+.btn-prev {
+  position: 'relative';
+  top: '37vh';
+  right: '8vw';
+}
+
+.btn-next {
+  position: 'relative';
+  top: '37vh';
+  left: '7vw';
+}
+
+.img {
+  width: '20vw';
+  height: '30vh';
+}

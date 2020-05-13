@@ -1,4 +1,7 @@
 import React from 'react';
+
+import './navbar.css';
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,7 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { Link } from 'react-router-dom';
 
-import styles from './style.ts';
+import styles from './style.js'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,13 +37,19 @@ function Navbar() {
           </IconButton>
           
           <Button color="inherit">
-          <Link to="/users" style={styles._bgColor}>Users
+          <Link to="/users" className="link" style={styles._bgColor}>Users
           </Link>
           </Button>
           
           <Button color="inherit">
-          <Link to="/" style={styles._bgColor}>
+          <Link to="/" className="link" style={styles._bgColor}>
           Posts
+          </Link>
+          </Button>
+
+          <Button color="inherit">
+          <Link to="/albums" className="link" style={styles._bgColor}>
+          Albums
           </Link>
           </Button>
           

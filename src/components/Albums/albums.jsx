@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
+
 import './albums.css';
+
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -9,11 +11,11 @@ import Typography from '@material-ui/core/Typography';
 
 import axios from 'axios';
 
-import styles from './style.js';
-
 import { Link } from 'react-router-dom';
 
-import baseUrl from '../config';
+import styles from './style.js'
+
+import baseUrl from '../../config';
 
 class Albums extends Component {
 

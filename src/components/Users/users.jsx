@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './users.css';
+
 import axios from 'axios';
 
 import { Link } from 'react-router-dom';
@@ -9,7 +11,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import styles from './style.ts';
+import styles from './style';
+
+import baseUrl from '../../config';
 
 
 class Users extends Component {
@@ -22,7 +26,7 @@ class Users extends Component {
 
     componentDidMount() {
 
-        axios(`https://jsonplaceholder.typicode.com/users`)
+        axios(`${baseUrl}/users`)
         .then(users => {
             this.setState({
                 users: users.data,
@@ -30,7 +34,7 @@ class Users extends Component {
             })
         })
         .catch(error => {
-            throw new Error(error)
+            console.error(error)
         });
     }
 
@@ -39,37 +43,37 @@ class Users extends Component {
 
         const usersList = users.map( user => {
           return ( 
-            <Link key={user.id} to={`/user/${user.id}`}>
-        <Card key={user.id} id={user.id} style={styles._card}>
-        <CardActionArea id={user.id}>
-          <CardContent id={user.id}>
+            <Link key={`user${user.id}`} to={`/user/${user.id}`}>
+        <Card id={`user${user.id}`} className="card" style={styles._card}>
+        <CardActionArea id={`user${user.id}`}>
+          <CardContent id={`user${user.id}`}>
 
-            <Typography id={user.id} gutterBottom component="p">
-            <span id={user.id}><b>Name</b>:{user.name}</span>
+            <Typography id={`user${user.id}`} gutterBottom component="p">
+            <span id={`user${user.id}`}><b>Name</b>:{user.name}</span>
             </Typography>
 
-            <Typography id={user.id} gutterBottom component="p">
-            <span id={user.id}><b>Username</b>:{user.username}</span>
+            <Typography id={`user${user.id}`} gutterBottom component="p">
+            <span id={`user${user.id}`}><b>Username</b>:{user.username}</span>
             </Typography>
 
-            <Typography id={user.id} gutterBottom component="p">
-            <span id={user.id}><b>Email</b>:{user.email}</span>
+            <Typography id={`user${user.id}`} gutterBottom component="p">
+            <span id={`user${user.id}`}><b>Email</b>:{user.email}</span>
             </Typography>
 
-            <Typography id={user.id} gutterBottom component="p">
-            <span id={user.id}><b>Address</b>:{user.address.street}, {user.address.suite}, {user.address.city}, {user.address.zipcode}</span>
+            <Typography id={`user${user.id}`} gutterBottom component="p">
+            <span id={`user${user.id}`}><b>Address</b>:{user.address.street}, {user.address.suite}, {user.address.city}, {user.address.zipcode}</span>
             </Typography>
 
-            <Typography id={user.id} gutterBottom component="p">
-            <span id={user.id}><b>Contact</b>:{user.phone}</span>   
+            <Typography id={`user${user.id}`} gutterBottom component="p">
+            <span id={`user${user.id}`}><b>Contact</b>:{user.phone}</span>   
             </Typography>
 
-            <Typography id={user.id} gutterBottom component="p">
-            <span id={user.id}><b>Website</b>:{user.website}</span>   
+            <Typography id={`user${user.id}`} gutterBottom component="p">
+            <span id={`user${user.id}`}><b>Website</b>:{user.website}</span>   
             </Typography>
 
-            <Typography id={user.id} gutterBottom component="p">
-            <span id={user.id}><b>Company</b>:{user.company.name}</span>   
+            <Typography id={`user${user.id}`} gutterBottom component="p">
+            <span id={`user${user.id}`}><b>Company</b>:{user.company.name}</span>   
             </Typography>
 
           </CardContent>
@@ -79,7 +83,7 @@ class Users extends Component {
           )
         })
         return (  
-            ( isLoaded === false ? <div> Loading... </div>: <div style={styles._userDiv}> {usersList} </div> )
+            ( isLoaded === false ? <div> Loading... </div>: <div className="user-container" style={styles._userDiv}> {usersList} </div> )
         );
     }
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './posts.css';
+
 import axios from 'axios';
 
 import Card from '@material-ui/core/Card';
@@ -8,7 +10,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
-import styles from './style.ts';
+import styles from './style';
+
+import baseUrl from '../../config';
 
 class Posts extends Component {
 
@@ -19,7 +23,7 @@ class Posts extends Component {
 
     componentDidMount() {
 
-        axios(`https://jsonplaceholder.typicode.com/posts`)
+        axios(`${baseUrl}/posts`)
         .then(posts => {
             this.setState({
                 posts: posts.data,
@@ -27,7 +31,7 @@ class Posts extends Component {
             })
         })
         .catch(error => {
-            throw new Error(error)
+            console.error(error)
         });
     }
 
@@ -37,21 +41,21 @@ class Posts extends Component {
 
         const postList = posts.map( post => {
           return (
-        <Link key={post.id} to={`/${post.id}`}>
-        <Card key={post.id} id={post.id} style={styles._card}>
-        <CardActionArea key={post.id} id={post.id}>
-          <CardContent key={post.id} id={post.id}>
+        <Link key={`post${post.id}`} to={`/${post.id}`}>
+        <Card id={`post${post.id}`} className="card" style={styles._card}>
+        <CardActionArea id={`post${post.id}`}>
+          <CardContent id={`post${post.id}`}>
 
-            <Typography id={post.id} gutterBottom component="p">
-            <span id={post.id}><b>User_ID</b>:{post.userId}</span>
+            <Typography id={`post${post.id}`} gutterBottom component="p">
+            <span id={`post${post.id}`}><b>User_ID</b>:{post.userId}</span>
             </Typography>
 
-            <Typography id={post.id} gutterBottom component="p">
-            <span id={post.id}><b>Title</b>:{post.title}</span>
+            <Typography id={`post${post.id}`} gutterBottom component="p">
+            <span id={`post${post.id}`}><b>Title</b>:{post.title}</span>
             </Typography>
 
-            <Typography id={post.id} gutterBottom component="p">
-            <span id={post.id}><b>Body</b>:{post.body}</span> 
+            <Typography id={`post${post.id}`} gutterBottom component="p">
+            <span id={`post${post.id}`}><b>Body</b>:{post.body}</span> 
             </Typography>
 
           </CardContent>
@@ -61,7 +65,7 @@ class Posts extends Component {
           )
         })
         return (  
-           ( isLoaded === false ? <div> Loading... </div> : <div style={styles._postDiv}> {postList} </div> )
+           ( isLoaded === false ? <div> Loading... </div> : <div className="post-container" style={styles._postDiv}> {postList} </div> )
         )
     }
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './userInfo.css'
+
 import axios from 'axios';
 
 import Card from '@material-ui/core/Card';
@@ -7,7 +9,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import styles from './style.ts';
+import styles from './style';
+
+import baseUrl from '../../config';
 
 class UserInfo extends Component {
 
@@ -22,7 +26,7 @@ constructor(){
 
     componentDidMount() {
 
-        axios(`https://jsonplaceholder.typicode.com/users/${this.props.match.params.id}`)
+        axios(`${baseUrl}/users/${this.props.match.params.id}`)
         .then(user => {
             this.setState({
                 userInfo: user.data,
@@ -30,13 +34,9 @@ constructor(){
             })
         })
         .catch(error => {
-            throw new Error(error)
+            console.error(error)
         })
     }
-
-    componentWillUnmount() { 
-        this._isMounted = false
-      }
 
 
     render() {
@@ -44,29 +44,29 @@ constructor(){
 
        const userDetails = (<React.Fragment>
             <div><h3>User Details</h3></div>
-            <div key={userInfo.id} style={styles._div}>
-            <Card key={userInfo.id} id={userInfo.id} style={styles._card}>
-            <CardActionArea id={userInfo.id}>
-              <CardContent id={userInfo.id}>
+            <div className="userInfo-container" key={`user${userInfo.id}`} style={styles._div}>
+            <Card id={`user${userInfo.id}`} className="card" style={styles._card}>
+            <CardActionArea id={`user${userInfo.id}`}>
+              <CardContent id={`user${userInfo.id}`}>
     
-                <Typography id={userInfo.id} gutterBottom component="p">
-                <span id={userInfo.id}><b>Name</b>:{userInfo.name}</span>
+                <Typography id={`user${userInfo.id}`} gutterBottom component="p">
+                <span id={`user${userInfo.id}`}><b>Name</b>:{userInfo.name}</span>
                 </Typography>
     
-                <Typography id={userInfo.id} gutterBottom component="p">
-                <span id={userInfo.id}><b>Username</b>:{userInfo.username}</span>
+                <Typography id={`user${userInfo.id}`} gutterBottom component="p">
+                <span id={`user${userInfo.id}`}><b>Username</b>:{userInfo.username}</span>
                 </Typography>
     
-                <Typography id={userInfo.id} gutterBottom component="p">
-                <span id={userInfo.id}><b>Email</b>:{userInfo.email}</span>
+                <Typography id={`user${userInfo.id}`} gutterBottom component="p">
+                <span id={`user${userInfo.id}`}><b>Email</b>:{userInfo.email}</span>
                 </Typography>
     
-                <Typography id={userInfo.id} gutterBottom component="p">
-                <span id={userInfo.id}><b>Contact</b>:{userInfo.phone}</span>   
+                <Typography id={`user${userInfo.id}`} gutterBottom component="p">
+                <span id={`user${userInfo.id}`}><b>Contact</b>:{userInfo.phone}</span>   
                 </Typography>
     
-                <Typography id={userInfo.id} gutterBottom component="p">
-                <span id={userInfo.id}><b>Website</b>:{userInfo.website}</span>   
+                <Typography id={`user${userInfo.id}`} gutterBottom component="p">
+                <span id={`user${userInfo.id}`}><b>Website</b>:{userInfo.website}</span>   
                 </Typography>
                 
               </CardContent>

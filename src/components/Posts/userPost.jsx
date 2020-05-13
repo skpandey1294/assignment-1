@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+
+import './userPost.css';
 
 import axios from 'axios';
 
@@ -7,8 +9,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import styles from './style.ts';
+import styles from './style';
 
+import baseUrl from '../../config';
 
 class UserPost extends Component {
 
@@ -25,7 +28,7 @@ class UserPost extends Component {
 
     componentDidMount() {
 
-       const postResponse = axios(`https://jsonplaceholder.typicode.com/posts/${this.props.match.params.postId}`).then(post => {
+       const postResponse = axios(`${baseUrl}/posts/${this.props.match.params.postId}`).then(post => {
             this.setState((state) => {
                return {
                 post: post.data
@@ -33,10 +36,11 @@ class UserPost extends Component {
             })
         })
         .catch(error => {
-            throw new Error(error)
+            console.error(error)
         })
 
-         postResponse.then(() => {   axios(`https://jsonplaceholder.typicode.com/users/${this.state.post.userId}`)
+         postResponse.then(() => {   
+        axios(`${baseUrl}/users/${this.state.post.userId}`)
         .then(user => {
             this.setState({
                 username: user.data.username,
@@ -44,11 +48,12 @@ class UserPost extends Component {
             })
         })
         .catch(error => {
-            throw new Error(error)
+            console.error(error)
         })
     })
 
-    postResponse.then(() => { axios(`https://jsonplaceholder.typicode.com/posts/${this.props.match.params.postId}/comments`)
+    postResponse.then(() => { 
+        axios(`${baseUrl}/posts/${this.props.match.params.postId}/comments`)
         .then(comment => {
             this.setState({
                 comment: comment.data,
@@ -57,7 +62,7 @@ class UserPost extends Component {
         })
         })
         .catch(error => {
-            throw new Error(error)
+            console.error(error)
         })
     }
         
@@ -67,40 +72,42 @@ class UserPost extends Component {
 
         const comments = comment.map(comment => {
             return(
-                <Typography key={comment.id} id={comment.id} gutterBottom component="p">
-                <span id={comment.id}><b>comment by </b> <u><i> {comment.name} </i></u>: {comment.body}</span>
+                <div key={`comment${comment.id}`}>
+                <hr></hr>
+                <Typography id={`comment${comment.id}`} gutterBottom component="p">
+                <span id={`comment${comment.id}`}><b>comment by user</b>: {comment.name}</span>
+                </Typography><br></br>
+                <Typography id={`comment${comment.id}`} gutterBottom component="p">
+                <span id={`comment${comment.id}`}><b>comment</b>: {comment.body}</span>
                 </Typography>
+                </div>
                 )
         })  
 
         const userPost = (
-        <React.Fragment>
+        <Fragment>
             <div>
                 <h3>UserPost</h3>
             </div>
 
-            <div key={post.id} style={styles._div}>
+            <div key={`post${post.id}`} className="card-container" style={styles._div}>
 
-                <Card key={post.id} id={post.id} style={styles._card}>
+                <Card id={`post${post.id}`} className="card" style={styles._singleCard}>
 
-                    <CardActionArea id={post.id}>
+                    <CardActionArea id={`post${post.id}`}>
 
-                        <CardContent id={post.id}>
-
-                            <Typography id={post.id} gutterBottom component="p">
-                                <span id={post.id}><b>UserId</b>: {post.userId} </span>
-                            </Typography>
+                        <CardContent id={`post${post.id}`}>
                             
-                            <Typography id={post.id} gutterBottom component="p">
-                                <span id={post.id}><b>UserName</b>: {username} </span>
+                            <Typography id={`post${post.id}`} gutterBottom component="p">
+                                <span id={`post${post.id}`}><b>UserName</b>: {username} </span>
                             </Typography>
     
-                            <Typography id={post.id} gutterBottom component="p">
-                            <span id={post.id}><b>Title</b>: {post.title} </span>
+                            <Typography id={`post${post.id}`} gutterBottom component="p">
+                            <span id={`post${post.id}`}><b>Title</b>: {post.title} </span>
                             </Typography>
 
-                            <Typography id={post.id} gutterBottom component="p">
-                            <span id={post.id}><b>Body</b>: {post.body} </span>
+                            <Typography id={`post${post.id}`} gutterBottom component="p">
+                            <span id={`post${post.id}`}><b>Body</b>: {post.body} </span>
                             </Typography>
 
                             <React.Fragment>{comments}</React.Fragment>
@@ -113,7 +120,7 @@ class UserPost extends Component {
 
             </div>
 
-        </React.Fragment>
+        </Fragment>
         )
 
         return (
