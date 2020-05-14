@@ -43,13 +43,13 @@ class Albums extends Component {
 
           <Card id={`album${album.id}`} className="card">
 
-          <CardActionArea id={`album${album.id}`}>
+          <CardActionArea >
 
-            <CardContent id={`album${album.id}`}>
+            <CardContent >
   
-              <Typography id={`album${album.id}`} gutterBottom component="p">
+              <Typography gutterBottom component="p">
 
-              <span id={`album${album.id}`}>
+              <span>
 
                   <b>Title</b>:{album.title}
 
