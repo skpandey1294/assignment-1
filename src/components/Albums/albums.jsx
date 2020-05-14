@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-
 import './albums.css';
-
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,8 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 
 import { Link } from 'react-router-dom';
-
-import styles from './style.js'
 
 import baseUrl from '../../config';
 
@@ -45,7 +41,7 @@ class Albums extends Component {
             return ( 
               <Link key={`album${album.id}`} to={`/album/${album.id}`}>
 
-          <Card id={`album${album.id}`} className="card" style={styles._card}>
+          <Card id={`album${album.id}`} className="card">
 
           <CardActionArea id={`album${album.id}`}>
 
@@ -72,7 +68,7 @@ class Albums extends Component {
           })
         return (
             
-        ( isLoading === false ? <div>Loading...</div> : <div className="albums-container" style={styles._userDiv}>{albumsList}</div> )
+        ( isLoading === false ? <div>Loading...</div> : <div className="albums-container">{albumsList}</div> )
        
         )
     }
