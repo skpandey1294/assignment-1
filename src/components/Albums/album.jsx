@@ -74,8 +74,8 @@ class Album extends Component {
             isLoading === false ? <div>Loading...</div> :
             <div  onMouseEnter={this.onHoverTrue} onMouseLeave={this.onHoverFalse}>
                 <div>
-                <button className="btn-prev" onClick={() => this.prev()} disabled={index === 0} style={{position: "relative", top: '37vh', right: '8vw', opacity }}><SkipPrevious /></button>
-                <button className="btn-next" onClick={() => this.next()} disabled={index === length-1} style={{position: "relative", top: '37vh', left: '7vw', opacity}}><SkipNext /></button>
+                <button className="btn-prev" onClick={() => this.prev()} disabled={index === 0} style={{ opacity }}><SkipPrevious /></button>
+                <button className="btn-next" onClick={() => this.next()} disabled={index === length-1} style={{ opacity }}><SkipNext /></button>
             </div>
             <div className="card-container">
                 <img className="img" src={currPicture} alt={currTitle}/><br></br>
